@@ -1,0 +1,56 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
+ */
+package triangulo;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+/**
+ *
+ * @author ramon
+ */
+public class Triangulo {
+
+    /**
+     * @param args the command line arguments
+     */
+    private int side1;
+    private int side2;
+    private int side3;
+
+//    public Triangulo(int s1, int s2, int s3) {
+//        try {
+//            side1 = s1;
+//            side2 = s2;
+//            side3 = s3;
+//            System.out.println("(" + side1 + "," + side2 + "," + side3 + ")");
+//
+//            if (s1 <= 0 || s2 <= 0 || s3 <= 0) {
+//                throw new TriangleException("Numeros no validos");
+//            } else {
+//                showTriangle(side1, side2, side3);
+//            }
+//        } catch (TriangleException e) {
+//            System.err.println("Capturado: " + e.getLocalizedMessage());
+//        }
+//        if (s1 > 0 || s2 > 0 || s3 > 0) {
+//            showTriangle(side1, side2, side3);
+//        }
+//    }
+    public Triangulo(int s1, int s2, int s3) {
+
+        side1 = s1;
+        side2 = s2;
+        side3 = s3;
+        showTriangle(side1, side2, side3);
+
+    }
+
+    private void showTriangle(int side1, int side2, int side3) {
+        System.out.println("(" + side1 + "," + side2 + "," + side3 + ")");
+        System.out.println("Side 1: " + side1 + "," + " Side 2: " + side2 + "," + " Side 3: " + side3);
+
+    }
+}
