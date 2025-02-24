@@ -1,0 +1,116 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package ejercicio1s;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Scanner;
+
+/**
+ *
+ * @author ramon
+ */
+public class Ejercicio1S {
+
+    public static void main(String[] args) throws IOException {
+        new Ejercicio1S().inicio();
+    }
+
+    String f = "texto.txt";
+
+    public void inicio() throws IOException {
+        String res = "";
+        int cont = 3;
+
+        //Iniciamos Scanner
+        do {
+            try {
+                File fichero = new File(f); //FALTA AÑADIR (.TXT)
+                System.out.println("Dame el nombre de un fichero que tenga un nombre + espacio + numero");
+                Scanner scan = new Scanner(System.in);
+                res = scan.nextLine();
+                //num = scan.nextInt();
+                //System.out.println(num);
+                if (res.length() == 0) {
+                    throw new vacio("Linea vacia");
+                }
+
+                if ((res.length() != 0) && mismoFichero(res)) {
+                    //imprimir primera linea
+                    leerPrimeraLinea(fichero);
+                    System.out.println("Fichero correcto");
+                    break;
+                }else{
+                    throw new ficheroNoIgual("Nombre de fichero no valido");
+                }
+
+            } catch (vacio | ficheroNoIgual e) {
+                System.err.println("Capturado: " + e.getLocalizedMessage());
+            }
+            cont--;
+        } while (cont != 0);
+
+        if (cont == 0) {
+            System.out.println("-------------------------------------");
+            System.out.println("Numero de intentos maximos intentados");
+        }
+
+    }
+
+    //Metodos que ayudan a realizar el trabajo
+  
+    private boolean mismoFichero(String fr) {
+        boolean mismo = false;
+        if (f.equals(fr)) {
+            mismo = true;
+        }
+        return mismo;
+
+    }
+    
+    private void leerPrimeraLinea(File f) throws FileNotFoundException {
+        Scanner sc = new Scanner(f);
+        String lin = "";
+        try {
+            while(sc.hasNextLine()){
+                lin = sc.nextLine();
+                System.out.println(lin);
+            }
+            if (lin == "") {
+                throw new lineaVacia("En el fichero no hay nada escrito");
+            }
+           
+        } catch (lineaVacia ex) {
+            System.err.println("Capturado: " + ex.getLocalizedMessage());
+        }
+    }
+
+    //
+    // Excepciones
+    class lineaVacia extends Exception {
+
+        public lineaVacia(String mensaje) {
+            super(mensaje);
+        }
+
+    }
+
+    class ficheroNoIgual extends Exception {
+
+        public ficheroNoIgual(String mensaje) {
+            super(mensaje);
+        }
+    }
+
+    class vacio extends Exception {
+
+        public vacio(String mensaje) {
+            super(mensaje);
+        }
+    }
+
+    
+}
