@@ -1,0 +1,100 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
+Ejercicio3
+ */
+package ejercicio3;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
+/**
+ *
+ * @author ramon
+ */
+public class Ejercicio3 extends javax.swing.JFrame {
+
+    private javax.swing.JButton boton;
+    private javax.swing.JLabel panel;
+    private javax.swing.JTextField texto;
+    Scanner scan;
+    //String f = "nombres.txt";
+    String res = "";
+
+    public Ejercicio3() {
+        this.setSize(750, 490);
+        setTitle("Ventana");
+        initComponents();
+    }
+
+    private void initComponents() {
+
+        this.boton = new javax.swing.JButton();
+        this.panel = new javax.swing.JLabel();
+        //this.texto = new javax.swing.JTextField();
+        texto = new JTextField(20);
+        //scan = new Scanner(System.in);
+
+        this.getContentPane().setLayout(null);
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
+
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                exitForm(evt);
+            }
+        });
+
+        this.panel.setText("Introduce texto:");
+        this.panel.setAlignmentX(TOP_ALIGNMENT);
+        this.panel.setAlignmentY(TOP_ALIGNMENT);
+        this.panel.setFont(new java.awt.Font("Time New Roman", 1, 25));
+        this.getContentPane().add(panel); //Se añade al panel raiz
+        this.panel.setBounds(10, 0, getWidth(), 50);
+
+        //____________________________________________________________________//
+        this.boton.setToolTipText("Clica para guardar el nombre");
+        this.boton.setText("Guardar");
+
+        this.boton.addActionListener(e -> guardarTexto());
+        //this.boton.setMnemonic('S');// alt + c per activar el botó
+        this.getContentPane().add(boton); //Se añade al panel raiz
+        this.boton.setBounds(0, 400, 750, 50);
+
+        //____________________________________________________________________//
+        this.texto.setBounds(10, 50, 700, 30);
+        this.getContentPane().add(texto); //Se añade al panel raiz
+
+        //____________________________________________________________________//
+    }
+
+    private void exitForm(java.awt.event.WindowEvent evt) {
+        System.exit(0);
+    }
+
+    private void guardarTexto() {
+        res = texto.getText();
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("nombres.txt", true))) {
+            writer.write(res);
+            writer.newLine();
+            texto.setText("");
+            JOptionPane.showMessageDialog(this, "Texto guardado correctamente.");
+
+        } catch (IOException ex) {
+            Logger.getLogger(Ejercicio3.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public static void main(String[] args) {
+        Ejercicio3 e = new Ejercicio3();
+        e.setVisible(true);
+    }
+
+}
